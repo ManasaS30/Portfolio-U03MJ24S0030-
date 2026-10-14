@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171421">
+<meta name="description" content="Manasa S — BCA Final Year Student and Web Developer Portfolio">
+<title>Manasa S | Ubuntu Developer Portfolio</title>
+
+<style>
+:root {
+    --bg:#171421;
+    --surface:#211c30;
+    --card:#292338;
+    --text:#f7f3ff;
+    --muted:#aaa2bb;
+    --accent:#e95420;
+    --accent2:#ff956b;
+    --border:rgba(255,255,255,.11);
+    --terminal:#111016;
+    --green:#8ae234;
+    --shadow:0 20px 55px rgba(0,0,0,.22);
+}
+body.light {
+    --bg:#f7f5fb;
+    --surface:#fff;
+    --card:#fff;
+    --text:#241c35;
+    --muted:#716981;
+    --accent:#e95420;
+    --accent2:#c74212;
+    --border:rgba(40,30,60,.13);
+    --terminal:#211d2b;
+    --shadow:0 20px 55px rgba(45,30,70,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{
+    font-family:Ubuntu,"Segoe UI",Arial,sans-serif;
+    background:
+      radial-gradient(ellipse at 85% 5%,#e954201c,transparent 35%),
+      radial-gradient(ellipse at 5% 45%,#75507b20,transparent 35%),
+      var(--bg);
+    color:var(--text);line-height:1.7;overflow-x:hidden;
+    transition:background .3s,color .3s;
+}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.container{width:min(1150px,90%);margin:auto}
+.accent{color:var(--accent)}
+.section{padding:95px 0;scroll-margin-top:80px}
+.heading{font-size:clamp(2rem,4vw,2.8rem);line-height:1.2;margin-bottom:15px}
+.subtitle{max-width:680px;color:var(--muted);margin-bottom:40px}
+
+/* NAVIGATION */
+.navbar{
+    position:sticky;top:0;z-index:1000;
+    background:color-mix(in srgb,var(--bg) 90%,transparent);
+    backdrop-filter:blur(18px);border-bottom:1px solid var(--border)
+}
+.nav-content{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:800;white-space:nowrap}
+.logo-symbol{width:39px;height:39px;border-radius:50%;background:var(--accent);color:white;display:grid;place-items:center;font-size:25px}
+.nav-links{display:flex;gap:22px;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);font-size:.9rem;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-actions{display:flex;gap:10px}
+.icon-btn{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:1.1rem}
+.menu-btn{display:none}
+
+/* HERO */
+.hero{min-height:88vh;display:flex;align-items:center;padding:75px 0}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:9px;padding:8px 14px;border:1px solid var(--border);background:var(--card);border-radius:30px;font-size:.84rem;color:var(--muted);margin-bottom:25px}
+.status-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;box-shadow:0 0 12px #4ade8080}
+.hero h1{font-size:clamp(2.8rem,6vw,5rem);line-height:1.08;letter-spacing:-2px;margin-bottom:20px}
+.hero h2{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:500;color:var(--muted);margin-bottom:22px}
+.hero-description{max-width:560px;color:var(--muted);margin-bottom:30px}
+.buttons{display:flex;flex-wrap:wrap;gap:13px;margin-bottom:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 20px;border:1px solid var(--border);border-radius:12px;font-weight:650;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.btn-primary{color:white;background:var(--accent);border-color:var(--accent)}
+.btn-secondary{background:var(--card)}
+.socials{display:flex;flex-wrap:wrap;gap:20px}
+.socials a{color:var(--muted);font-size:.92rem}
+.socials a:hover{color:var(--accent)}
+
+/* TERMINAL */
+.terminal{background:var(--terminal);color:#e5e1ee;border:1px solid #ffffff20;border-radius:17px;overflow:hidden;box-shadow:0 30px 90px #0003;transition:transform .3s}
+.terminal:hover{transform:translateY(-5px)}
+.terminal-bar{background:#292531;display:flex;align-items:center;gap:8px;padding:13px 16px;font:.8rem monospace;color:#ddd5e8}
+.dot{width:11px;height:11px;border-radius:50%}
+.red{background:#ff5f57}.yellow{background:#febc2e}.green-dot{background:#28c840}
+.terminal-title{margin:auto;padding-right:45px}
+.terminal-body{padding:26px;min-height:350px;font:.88rem/1.9 Consolas,monospace;overflow-wrap:anywhere}
+.prompt{color:var(--green)}.orange{color:#ff966e}.purple{color:#cba6f7}.terminal-muted{color:#9691a5}
+.cursor{display:inline-block;width:8px;height:17px;background:var(--green);vertical-align:middle;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+.terminal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:20px}
+.terminal-stat{text-align:center;border:1px solid #393444;padding:10px 5px;border-radius:9px}
+.terminal-stat strong{display:block;color:#ff966e}
+.terminal-stat span{color:#aaa2bb;font-size:.72rem}
+
+/* QUICK INFO */
+.quick-info{padding:25px 0;background:var(--card);border-block:1px solid var(--border)}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.info-item{display:flex;align-items:center;justify-content:center;gap:13px}
+.info-icon{width:45px;height:45px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;background:#e954201a;font-size:1.3rem}
+.info-item small{display:block;color:var(--muted)}
+.info-item strong{font-size:.9rem}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:center}
+.about-visual{min-height:330px;padding:28px;border-radius:23px;background:linear-gradient(145deg,#e95420,#704184);color:white;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
+.about-code{font:800 clamp(2.5rem,5vw,4.5rem)/1.15 Consolas,monospace}
+.about-content p{color:var(--muted);margin-bottom:17px}
+.tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:23px}
+.tag{padding:7px 12px;border:1px solid var(--border);border-radius:9px;background:var(--card);font-size:.83rem}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.skill-card{padding:25px;border:1px solid var(--border);background:var(--card);border-radius:17px;transition:transform .25s,border-color .25s}
+.skill-card:hover{transform:translateY(-6px);border-color:var(--accent)}
+.skill-icon{font-size:1.8rem;margin-bottom:12px}
+.skill-card h3{margin-bottom:8px}
+.skill-card p{color:var(--muted);font-size:.9rem}
+.skill-track{height:5px;border-radius:10px;overflow:hidden;background:var(--border);margin-top:20px}
+.skill-fill{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--accent),#ffab75);transition:width 1.2s ease}
+.note{color:var(--muted);font-size:.82rem;margin-top:20px}
+
+/* PROJECTS */
+.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
+.project-card{border:1px solid var(--border);background:var(--card);border-radius:20px;overflow:hidden;transition:transform .3s,border-color .3s}
+.project-card:hover{transform:translateY(-7px);border-color:var(--accent)}
+.project-preview{min-height:190px;display:grid;place-items:center;position:relative;overflow:hidden;background:#211c30}
+.project-preview::before,.project-preview::after{content:"";position:absolute;width:180px;height:180px;border:1px solid #ffffff17;border-radius:50%}
+.project-preview::before{transform:translate(-40px,-20px)}
+.project-preview::after{transform:translate(40px,20px)}
+.watch-art{font-size:5rem;z-index:1;filter:drop-shadow(0 10px 25px #e9542066)}
+.terminal-preview{background:#111016}
+.mini-terminal{z-index:1;font:.85rem/2 Consolas,monospace;color:var(--green);padding:15px}
+.project-body{padding:25px}
+.project-status{display:inline-block;padding:5px 10px;margin-bottom:13px;border-radius:20px;color:var(--accent2);background:#e954201a;font-size:.75rem}
+.project-body h3{margin-bottom:10px}
+.project-body p{color:var(--muted);font-size:.92rem;margin-bottom:18px}
+.project-tech{display:flex;flex-wrap:wrap;gap:8px}
+.project-tech span{padding:5px 9px;background:var(--surface);border:1px solid var(--border);border-radius:7px;font-size:.75rem}
+.project-links{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px}
+.project-link{color:var(--accent2);font-weight:650;font-size:.9rem}
+.project-link:hover{text-decoration:underline}
+
+/* JOURNEY */
+.roadmap{position:relative;max-width:760px;margin:auto}
+.roadmap::before{content:"";position:absolute;left:14px;top:10px;bottom:10px;width:2px;background:var(--border)}
+.roadmap-item{position:relative;padding:0 0 35px 48px}
+.roadmap-item:last-child{padding-bottom:0}
+.roadmap-dot{position:absolute;left:5px;top:5px;width:20px;height:20px;border-radius:50%;background:var(--accent);border:5px solid var(--bg);box-shadow:0 0 0 1px var(--accent)}
+.roadmap-date{font:.85rem Consolas,monospace;color:var(--accent2);margin-bottom:7px}
+.roadmap-item h3{margin-bottom:7px}
+.roadmap-item p{color:var(--muted)}
+
+/* CONTACT */
+.contact-box{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;padding:40px;border:1px solid var(--border);border-radius:24px;background:var(--card);box-shadow:var(--shadow)}
+.contact-details>p{color:var(--muted);margin:15px 0 25px}
+.contact-link{display:flex;align-items:center;gap:12px;margin:18px 0;overflow-wrap:anywhere}
+.contact-link>span{color:var(--accent);font-size:1.3rem}
+.contact-link small{color:var(--muted)}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:7px}
+.form-group label{font-size:.9rem;font-weight:600}
+.form-group input,.form-group textarea{width:100%;padding:13px 15px;border:1px solid var(--border);border-radius:11px;background:var(--surface);color:var(--text);outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group textarea{min-height:120px;resize:vertical}
+.form-message{color:var(--muted);font-size:.84rem}
+
+/* FOOTER */
+footer{padding:30px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border);font-size:.9rem}
+.back-to-top{position:fixed;right:22px;bottom:22px;width:45px;height:45px;display:grid;place-items:center;background:var(--accent);color:white;border:none;border-radius:13px;z-index:900;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(10px);transition:.25s}
+.back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+::selection{background:var(--accent);color:white}
+
+/* RESPONSIVE */
+@media(max-width:950px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .terminal{max-width:700px}
+    .about-grid{grid-template-columns:1fr}
+    .about-visual{min-height:260px}
+    .skills-grid{grid-template-columns:repeat(2,1fr)}
+    .contact-box{grid-template-columns:1fr}
+    .nav-links{gap:12px}
+}
+@media(max-width:700px){
+    .container{width:91%}
+    .nav-content{min-height:68px}
+    .menu-btn{display:grid}
+    .nav-links{display:none;position:absolute;left:0;right:0;top:68px;padding:15px 5%;flex-direction:column;align-items:stretch;gap:0;background:var(--surface);border-bottom:1px solid var(--border)}
+    .nav-links.open{display:flex}
+    .nav-links a{display:block;padding:11px 0}
+    .section{padding:72px 0}
+    .hero{min-height:auto;padding:65px 0}
+    .hero h1{letter-spacing:-1.5px}
+    .info-grid{grid-template-columns:1fr;gap:20px}
+    .info-item{justify-content:flex-start}
+    .project-grid{grid-template-columns:1fr}
+    .contact-box{padding:25px 20px;gap:28px}
+    .terminal-body{padding:20px 14px;font-size:.78rem}
+    .terminal-stats{gap:6px}
+    .skills-grid{gap:13px}
+    .skill-card{padding:18px 14px}
+}
+@media(max-width:400px){
+    .skills-grid{grid-template-columns:1fr}
+    .logo{font-size:1rem}
+    .logo-symbol{width:34px;height:34px}
+    .buttons .btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+    .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="container nav-content">
+        <a href="#home" class="logo">
+            <span class="logo-symbol">◉</span>
+            <span>Manasa S<span class="accent"> .dev</span></span>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="icon-btn" id="themeToggle" aria-label="Switch theme" title="Change theme">☀️</button>
+            <button class="icon-btn menu-btn" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section class="hero" id="home">
+    <div class="container hero-grid">
+        <div class="hero-content reveal">
+            <div class="status"><span class="status-dot"></span> Final Year BCA Student · Aspiring Developer</div>
+
+            <h1>Hello, I'm<br><span class="accent">Manasa S.</span></h1>
+
+            <h2>I build for the web. <span class="accent" id="typingText">Frontend Developer</span></h2>
+
+            <p class="hero-description">
+                I'm a final-year BCA student passionate about web development,
+                creative problem-solving, and building interactive digital
+                experiences. I'm exploring frontend and backend technologies
+                to turn ideas into useful applications.
+            </p>
+
+            <div class="buttons">
+                <a href="#projects" class="btn btn-primary">Explore My Work ↗</a>
+                <a href="#contact" class="btn btn-secondary">Let's Connect</a>
+            </div>
+
+            <div class="socials">
+                <a href="https://github.com/ManasaS30" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+                <a href="mailto:mmanasa51511@gmail.com">✉ Email</a>
+                <a href="#about">↓ Discover More</a>
+            </div>
+        </div>
+
+        <div class="terminal reveal">
+            <div class="terminal-bar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green-dot"></span>
+                <span class="terminal-title">manasa@ubuntu: ~</span>
+            </div>
+
+            <div class="terminal-body">
+                <div><span class="prompt">manasa@ubuntu</span>:<span class="orange">~</span>$ whoami</div>
+                <div class="purple">Manasa S. — Developer in Progress</div><br>
+
+                <div><span class="prompt">manasa@ubuntu</span>:<span class="orange">~</span>$ cat profile.json</div>
+                <div>
+                    <span class="terminal-muted">{</span><br>
+                    &nbsp;&nbsp;<span class="orange">"name"</span>: <span class="purple">"Manasa S"</span>,<br>
+                    &nbsp;&nbsp;<span class="orange">"course"</span>: <span class="purple">"BCA"</span>,<br>
+                    &nbsp;&nbsp;<span class="orange">"year"</span>: <span class="purple">"Final Year"</span>,<br>
+                    &nbsp;&nbsp;<span class="orange">"focus"</span>: <span class="purple">"Web Development"</span>,<br>
+                    &nbsp;&nbsp;<span class="orange">"mindset"</span>: <span class="purple">"Always Learning"</span><br>
+                    <span class="terminal-muted">}</span>
+                </div><br>
+
+                <div><span class="prompt">manasa@ubuntu</span>:<span class="orange">~</span>$ ls skills/</div>
+                <div class="purple">HTML CSS JavaScript Tailwind Flask Node.js</div><br>
+
+                <div><span class="prompt">manasa@ubuntu</span>:<span class="orange">~</span>$ <span class="cursor"></span></div>
+
+                <div class="terminal-stats">
+                    <div class="terminal-stat"><strong>01</strong><span>Developer</span></div>
+                    <div class="terminal-stat"><strong>∞</strong><span>Ideas</span></div>
+                    <div class="terminal-stat"><strong>24/7</strong><span>Curiosity</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- QUICK INFO -->
+<section class="quick-info">
+    <div class="container info-grid">
+        <div class="info-item">
+            <div class="info-icon">🎓</div>
+            <div><small>Education</small><strong>Bachelor of Computer Applications</strong></div>
+        </div>
+        <div class="info-item">
+            <div class="info-icon">💻</div>
+            <div><small>Specialization</small><strong>Full-Stack Development</strong></div>
+        </div>
+        <div class="info-item">
+            <div class="info-icon">🚀</div>
+            <div><small>Current Goal</small><strong>Build Meaningful Projects</strong></div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+    <div class="container about-grid">
+        <div class="about-visual reveal">
+            <p>/* A LITTLE ABOUT ME */</p>
+            <div class="about-code">&lt;Code<br>&nbsp;Create<br>&nbsp;Repeat /&gt;</div>
+            <p>Turning curiosity into code, one project at a time.</p>
+        </div>
+
+        <div class="about-content reveal">
+            <h2 class="heading">About <span class="accent">Me</span></h2>
+            <p>I'm Manasa S, a final-year BCA student interested in creating websites and understanding how applications work behind the scenes.</p>
+            <p>My learning journey includes HTML, CSS, JavaScript, and Tailwind CSS, alongside backend technologies such as Flask and Node.js.</p>
+            <p>I enjoy exploring new tools, improving my coding skills, and experimenting with ideas that can become practical digital products. My goal is to grow into a confident, well-rounded developer.</p>
+
+            <div class="tags">
+                <span class="tag">🧠 Curious Learner</span>
+                <span class="tag">⌨️ Problem Solver</span>
+                <span class="tag">🌐 Web Enthusiast</span>
+                <span class="tag">🐧 Linux Inspired</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+    <div class="container">
+        <h2 class="heading reveal">My Tech <span class="accent">Stack</span></h2>
+        <p class="subtitle reveal">Technologies I'm learning and exploring as I develop my web development skills.</p>
+
+        <div class="skills-grid">
+            <article class="skill-card reveal">
+                <div class="skill-icon">🌐</div><h3>HTML5</h3>
+                <p>Creating structured, accessible web pages.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="85%"></span></div>
+            </article>
+            <article class="skill-card reveal">
+                <div class="skill-icon">🎨</div><h3>CSS3</h3>
+                <p>Responsive layouts, animations, and visual design.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="80%"></span></div>
+            </article>
+            <article class="skill-card reveal">
+                <div class="skill-icon">⚡</div><h3>JavaScript</h3>
+                <p>Adding interactive behaviour to websites.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="70%"></span></div>
+            </article>
+            <article class="skill-card reveal">
+                <div class="skill-icon">🌊</div><h3>Tailwind CSS</h3>
+                <p>Utility-first styling and interface development.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="65%"></span></div>
+            </article>
+            <article class="skill-card reveal">
+                <div class="skill-icon">🐍</div><h3>Flask</h3>
+                <p>Learning Python-based backend and web development.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="60%"></span></div>
+            </article>
+            <article class="skill-card reveal">
+                <div class="skill-icon">🟢</div><h3>Node.js</h3>
+                <p>Exploring server-side JavaScript and APIs.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="60%"></span></div>
+            </article>
+            <article class="skill-card reveal">
+                <div class="skill-icon">🖥️</div><h3>Frontend Development</h3>
+                <p>Designing responsive interfaces and web experiences.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="70%"></span></div>
+            </article>
+            <article class="skill-card reveal">
+                <div class="skill-icon">⚙️</div><h3>Backend Development</h3>
+                <p>Learning server logic, routes, and API integration.</p>
+                <div class="skill-track"><span class="skill-fill" data-width="60%"></span></div>
+            </article>
+        </div>
+
+        <p class="note">Skill indicators are illustrative, not formal proficiency ratings.</p>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+    <div class="container">
+        <h2 class="heading reveal">Projects & <span class="accent">Ideas</span></h2>
+        <p class="subtitle reveal">Projects that represent my learning, creativity, and development goals.</p>
+
+        <div class="project-grid">
+
+            <!-- PROJECT 1 -->
+            <article class="project-card reveal">
+                <div class="project-preview">
+                    <div class="watch-art">⌚</div>
+                </div>
+                <div class="project-body">
+                    <span class="project-status">◉ Upcoming Project</span>
+                    <h3>Online Watch Store</h3>
+                    <p>
+                        A web project for showcasing watches, viewing product details,
+                        and exploring a user-friendly shopping experience. This project
+                        will help me practise frontend development and backend integration.
+                    </p>
+                    <div class="project-tech">
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Backend API</span>
+                    </div>
+                    <div class="project-links">
+                        <a class="project-link" href="https://github.com/ManasaS30/Online-Watch-Store-User-Management-System-" target="_blank" rel="noopener noreferrer">Explore it with GitHub ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card reveal">
+                <div class="project-preview terminal-preview">
+                    <div class="mini-terminal">
+                        &gt; initializing project...<br>
+                        &gt; loading source files...<br>
+                        &gt; exploring code...
+                        &gt; status: ready ✓
+                    </div>
+                </div>
+                <div class="project-body">
+                    <span class="project-status">◉ BD Project</span>
+                    <h3>Back-End Project</h3>
+                    <p>
+                        A coding repository from my development journey. Explore the
+                        source files and implementation details on GitHub.
+                    </p>
+                    <div class="project-tech">
+                        <span>Programming</span><span>Web Development</span><span>GitHub</span>
+                    </div>
+                    <div class="project-links">
+                        <a class="project-link" href="https://github.com/ManasaS30/U03MJ24S0030/tree/main" target="_blank" rel="noopener noreferrer">View Back-End Project ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 3 -->
+            <article class="project-card reveal">
+                <div class="project-preview terminal-preview">
+                    <div class="mini-terminal">
+                        &gt; initializing portfolio...<br>
+                        &gt; loading developer profile...<br>
+                        &gt; rendering responsive UI...<br>
+                        &gt; status: success ✓
+                    </div>
+                </div>
+                <div class="project-body">
+                    <span class="project-status">◉ FD Project</span>
+                    <h3>Front-End Project</h3>
+                    <p>
+                        A terminal-inspired portfolio featuring responsive layouts,
+                        interactive components, smooth animations, and a switchable
+                        dark and light theme.
+                    </p>
+                    <div class="project-tech">
+                        <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a class="project-link" href="https://github.com/ManasaS30/FDLAB/tree/main/Manasa.S" target="_blank" rel="noopener noreferrer">View Front-End Project ↗</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="section" id="journey">
+    <div class="container">
+        <h2 class="heading reveal">My Learning <span class="accent">Journey</span></h2>
+        <p class="subtitle reveal">Every line of code is a step forward.</p>
+
+        <div class="roadmap">
+            <div class="roadmap-item reveal">
+                <span class="roadmap-dot"></span>
+                <div class="roadmap-date">FOUNDATION</div>
+                <h3>Computer Applications</h3>
+                <p>Started studying computer applications and developing an understanding of programming and computing concepts.</p>
+            </div>
+            <div class="roadmap-item reveal">
+                <span class="roadmap-dot"></span>
+                <div class="roadmap-date">WEB DEVELOPMENT</div>
+                <h3>Exploring the Web</h3>
+                <p>Started learning HTML, CSS, JavaScript, responsive layouts, and frontend design.</p>
+            </div>
+            <div class="roadmap-item reveal">
+                <span class="roadmap-dot"></span>
+                <div class="roadmap-date">BACKEND DEVELOPMENT</div>
+                <h3>Learning Server-Side Technologies</h3>
+                <p>Exploring Flask, Node.js, APIs, and how web applications communicate with backend services.</p>
+            </div>
+            <div class="roadmap-item reveal">
+                <span class="roadmap-dot"></span>
+                <div class="roadmap-date">CURRENT FOCUS</div>
+                <h3>Final-Year BCA Projects</h3>
+                <p>Developing my portfolio, planning my Online Watch Store, and continuing to improve my technical skills.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+    <div class="container">
+        <h2 class="heading reveal">Let's <span class="accent">Connect</span></h2>
+        <p class="subtitle reveal">Have a project idea or want to connect? Send me a message or email me.</p>
+
+        <div class="contact-box reveal">
+            <div class="contact-details">
+                <h3>Get in Touch 👋</h3>
+                <p>I'm interested in learning, collaborating on projects, and connecting with people who enjoy technology.</p>
+
+                <a class="contact-link" href="mailto:mmanasa51511@gmail.com">
+                    <span>✉</span>
+                    <div><small>Email</small><br>mmanasa51511@gmail.com</div>
+                </a>
+
+                <a class="contact-link" href="https://github.com/ManasaS30" target="_blank" rel="noopener noreferrer">
+                    <span>⌘</span>
+                    <div><small>GitHub</small><br>github.com/ManasaS30</div>
+                </a>
+
+                <div class="contact-link">
+                    <span>🎓</span>
+                    <div><small>Education</small><br>BCA — Final Year</div>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" maxlength="100" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" maxlength="254" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" placeholder="Let's talk about your idea..." maxlength="3000" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message ↗</button>
+                <p class="form-message" id="formMessage" aria-live="polite">Your email app will open with your message prepared.</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container">
+        <p>Crafted with <span class="accent">♥</span> and code by <span class="accent">Manasa S.</span></p>
+        <p style="margin-top:7px">© <span id="currentYear"></span> · manasa.dev · Keep learning. Keep building.</p>
+    </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+/* 1. DARK / LIGHT THEME */
+
+const themeToggle = document.getElementById("themeToggle");
+
+function setTheme(theme) {
+    const light = theme === "light";
+    document.body.classList.toggle("light", light);
+    themeToggle.textContent = light ? "🌙" : "☀️";
+    themeToggle.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+
+    document.querySelector('meta[name="theme-color"]')
+        .setAttribute("content", light ? "#f7f5fb" : "#171421");
+
+    try {
+        localStorage.setItem("manasa-portfolio-theme", theme);
+    } catch (error) {}
+}
+
+let initialTheme = "dark";
+
+try {
+    initialTheme = localStorage.getItem("manasa-portfolio-theme") ||
+        (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+} catch (error) {}
+
+setTheme(initialTheme);
+
+themeToggle.addEventListener("click", () => {
+    setTheme(document.body.classList.contains("light") ? "dark" : "light");
+});
+
+
+/* 2. MOBILE NAVIGATION */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+const navigationLinks = document.querySelectorAll(".nav-links a");
+
+menuToggle.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("open");
+    menuToggle.textContent = open ? "✕" : "☰";
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+});
+
+function closeMenu() {
+    navLinks.classList.remove("open");
+    menuToggle.textContent = "☰";
+    menuToggle.setAttribute("aria-expanded", "false");
+}
+
+navigationLinks.forEach(link => link.addEventListener("click", closeMenu));
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeMenu();
+});
+
+
+/* 3. TYPING ANIMATION */
+
+const typingText = document.getElementById("typingText");
+const roles = [
+    "Frontend Developer",
+    "Backend Explorer",
+    "Creative Coder",
+    "Future Full-Stack Developer"
+];
+
+let roleIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function typeRole() {
+    const role = roles[roleIndex];
+    charIndex += deleting ? -1 : 1;
+    typingText.textContent = role.substring(0, charIndex);
+
+    let delay = deleting ? 45 : 85;
+
+    if (!deleting && charIndex === role.length) {
+        deleting = true;
+        delay = 1400;
+    } else if (deleting && charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        delay = 300;
+    }
+
+    setTimeout(typeRole, delay);
+}
+
+typeRole();
+
+
+/* 4. SCROLL REVEAL */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {threshold: 0.12});
+
+    revealElements.forEach(element => revealObserver.observe(element));
+} else {
+    revealElements.forEach(element => element.classList.add("show"));
+}
+
+
+/* 5. SKILL BAR ANIMATION */
+
+const skillBars = document.querySelectorAll(".skill-fill");
+
+if ("IntersectionObserver" in window) {
+    const skillObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.width = entry.target.dataset.width;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {threshold: 0.25});
+
+    skillBars.forEach(bar => skillObserver.observe(bar));
+} else {
+    skillBars.forEach(bar => bar.style.width = bar.dataset.width);
+}
+
+
+/* 6. ACTIVE SECTION IN NAVIGATION */
+
+const sections = document.querySelectorAll("main section[id]");
+
+if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navigationLinks.forEach(link => {
+                    link.classList.toggle(
+                        "active",
+                        link.getAttribute("href") === "#" + entry.target.id
+                    );
+                });
+            }
+        });
+    }, {rootMargin: "-25% 0px -60% 0px"});
+
+    sections.forEach(section => sectionObserver.observe(section));
+}
+
+
+/* 7. BACK TO TOP */
+
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("visible", window.scrollY > 400);
+});
+
+backToTop.addEventListener("click", () => {
+    window.scrollTo({top: 0, behavior: "smooth"});
+});
+
+
+/* 8. CONTACT FORM
+   This form opens the visitor's email application.
+   A backend service is not configured.
+*/
+
+const contactForm = document.getElementById("contactForm");
+const formMessage = document.getElementById("formMessage");
+
+contactForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+    }
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+        formMessage.textContent = "Please fill in all fields.";
+        return;
+    }
+
+    const subject = encodeURIComponent("Portfolio message from " + name);
+    const body = encodeURIComponent(
+        "Name: " + name +
+        "\nEmail: " + email +
+        "\n\nMessage:\n" + message
+    );
+
+    formMessage.textContent =
+        "Opening your email application. Send the prepared message there.";
+
+    window.location.href =
+        "mailto:mmanasa51511@gmail.com?subject=" + subject + "&body=" + body;
+});
+
+
+/* 9. AUTOMATIC COPYRIGHT YEAR */
+
+document.getElementById("currentYear").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
